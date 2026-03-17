@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>محتويات المحاضرة الأولى | المنصة التعليمية</title>
+    <title>محتويات المحاضرة الثالثة | المنصة التعليمية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-    :root {
+        :root {
+            /* ألوان المحاضرة الثالثة: النيلي والبرتقالي */
             --bg-body: #f0f4f8; --text-main: #1e293b; --header-bg: #ffffff;
-            --card-active: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); 
+            --card-active: linear-gradient(135deg, #4c51bf 0%, #6b46c1 100%); 
             --card-locked: linear-gradient(135deg, #e2ebf0 0%, #cfd9df 100%);
-            --text-locked: #475569; --icon-color: #a18cd1; 
+            --text-locked: #475569; --icon-color: #ed8936; 
         }
         [data-theme="dark"] {
             --bg-body: #05071b; --text-main: #f8fafc; --header-bg: #05071b;
-            --card-active: linear-gradient(135deg, #701a75 0%, #4a044e 100%);
+            --card-active: linear-gradient(135deg, #2a4365 0%, #2b6cb0 100%);
             --card-locked: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            --text-locked: #94a3b8; --icon-color: #fbc2eb; 
+            --text-locked: #94a3b8; --icon-color: #fbd38d; 
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
         body { background: var(--bg-body); color: var(--text-main); min-height: 100vh; overflow-x: hidden; -webkit-user-select: none; user-select: none; }
@@ -25,9 +26,9 @@
         .page-title { font-size: 1.5rem; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 10px; }
         .header-actions { display: flex; align-items: center; gap: 15px; }
 
-        .cta-back { display: flex; align-items: center; padding: 8px 25px; text-decoration: none; font-size: 18px; font-weight: bold; color: white; background: #6225e6; transition: 1s; box-shadow: -5px 5px 0 var(--text-main); transform: skewX(15deg); border: none; cursor: pointer; }
+        .cta-back { display: flex; align-items: center; padding: 8px 25px; text-decoration: none; font-size: 18px; font-weight: bold; color: white; background: #4c51bf; transition: 1s; box-shadow: -5px 5px 0 var(--text-main); transform: skewX(15deg); border: none; cursor: pointer; }
         [data-theme="dark"] .cta-back { background: var(--icon-color); color: #1e293b; box-shadow: -5px 5px 0 #ffffff; }
-        .cta-back:focus { outline: none; } .cta-back:hover { transition: 0.5s; box-shadow: -8px 8px 0 #fbc638; }
+        .cta-back:focus { outline: none; } .cta-back:hover { transition: 0.5s; box-shadow: -8px 8px 0 var(--icon-color); }
         .cta-back .span { transform: skewX(-15deg); font-family: 'Cairo'; }
         .cta-back .second { transition: 0.5s; margin-left: 0; margin-right: 15px; width: 25px; transform: rotate(180deg); display: flex; align-items: center;}
         .cta-back:hover .second { transition: 0.5s; margin-right: 35px; }
@@ -35,7 +36,7 @@
         .cta-back:hover .three { animation: color_anim 1s infinite 0.2s; }
         .cta-back:hover .one { transform: translateX(0%); animation: color_anim 1s infinite 0.6s; }
         .cta-back:hover .two { transform: translateX(0%); animation: color_anim 1s infinite 0.4s; }
-        @keyframes color_anim { 0% { fill: white; } 50% { fill: #fbc638; } 100% { fill: white; } }
+        @keyframes color_anim { 0% { fill: white; } 50% { fill: var(--icon-color); } 100% { fill: white; } }
 
         .theme-btn-wrapper { transform: scale(0.65); transform-origin: center right;} html[dir="ltr"] .theme-btn-wrapper { transform-origin: center left; }
         .toggleWrapper { overflow: hidden; color: white; display: flex; align-items: center;}
@@ -87,7 +88,7 @@
         .content-card h3 { font-size: 1.5rem; margin-bottom: 15px; font-weight: 900; }
         .content-card p { margin-bottom: 30px; flex-grow: 1; font-size: 1rem; opacity: 0.9;}
         .btn-enter { font-size: 1.1rem; padding: 0.8rem 2.5rem; border: none; outline: none; border-radius: 0.4rem; cursor: pointer; background-color: rgb(14, 14, 26); color: rgb(234, 234, 234); font-weight: 700; transition: 0.6s; box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.4); text-decoration: none; display: inline-block; margin: auto auto 0; font-family: 'Cairo'; width: 100%; }
-        .btn-enter:hover { background: linear-gradient(270deg, rgba(2, 29, 78, 0.9) 0%, rgba(31, 215, 232, 0.9) 100%); color: #ffffff; }
+        .btn-enter:hover { background: linear-gradient(270deg, var(--icon-color) 0%, #ffffff 100%); color: var(--text-main); }
         .locked-card { background: var(--card-locked); color: var(--text-locked); border: 1px dashed var(--text-locked); opacity: 0.8;}
         .locked-card .floating-icon { color: var(--text-locked); filter: grayscale(100%); }
         .spinner-container { display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: auto;}
@@ -99,7 +100,7 @@
 </head>
 <body>
     <header class="navbar">
-        <h2 class="page-title" data-i18n="lec_title">محتويات المحاضرة الأولى</h2>
+        <h2 class="page-title" data-i18n="lec_title">محتويات المحاضرة الثالثة</h2>
         <div class="header-actions">
             <div class="theme-btn-wrapper">
                 <div class="toggleWrapper">
@@ -130,7 +131,7 @@
         <h1 class="title" data-i18n="select_content">اختر مسار المذاكرة 📂</h1>
         <div class="grid">
             
-            <div class="content-card active-card" onclick="window.location.href='negotiation.html'" style="cursor: pointer;">
+            <div class="content-card active-card" onclick="window.location.href='interactive.html'" style="cursor: pointer;">
                 <div class="floating-icon"><i class="fa-solid fa-laptop-code"></i></div>
                 <h3 data-i18n="card1_title">الشرح التفاعلي</h3>
                 <p data-i18n="card1_desc">ذاكر المحاضرة بنظام الشرائح التفاعلية والأسئلة.</p>
@@ -149,8 +150,8 @@
     
     <script>
         const dict = {
-            ar: { lec_title: "المحاضرة الأولى", back_to_subject: "رجوع للمادة", select_content: "اختر مسار المذاكرة 📂", card1_title: "الشرح التفاعلي", card1_desc: "ذاكر المحاضرة بنظام الشرائح التفاعلية والأسئلة.", btn1: "بدء المذاكرة", loading: "جاري التجهيز...", card2_title: "الماتيريال الأصلي", card2_desc: "تصفح ملف الـ PDF الخاص بالمحاضرة.", btn2: "عرض الـ PDF", card3_title: "المحاضرة المشروحة", card3_desc: "تفريغ وشرح مبسط لشرائح المحاضرة باللغة العربية.", btn3: "قراءة الشرح", langTxt: "EN" },
-            en: { lec_title: "First Lecture", back_to_subject: "Back to Subject", select_content: "Choose Study Path 📂", card1_title: "Interactive Study", card1_desc: "Study the lecture with interactive slides and questions.", btn1: "Start Studying", loading: "Preparing...", card2_title: "Original Material", card2_desc: "Browse the original PDF file of the lecture.", btn2: "View PDF", card3_title: "Explained Lecture", card3_desc: "Simplified transcript and explanation of the slides.", btn3: "Read Explanation", langTxt: "عربي" }
+            ar: { lec_title: "المحاضرة الاولي ", back_to_subject: "رجوع للمادة", select_content: "اختر مسار المذاكرة 📂", card1_title: "الشرح التفاعلي", card1_desc: "ذاكر المحاضرة بنظام الشرائح التفاعلية والأسئلة.", btn1: "بدء المذاكرة", loading: "جاري التجهيز...", card2_title: "الماتيريال الأصلي", card2_desc: "تصفح ملف الـ PDF الخاص بالمحاضرة.", btn2: "عرض الـ PDF", langTxt: "EN" },
+            en: { lec_title: "Third Lecture", back_to_subject: "Back to Subject", select_content: "Choose Study Path 📂", card1_title: "Interactive Study", card1_desc: "Study the lecture with interactive slides and questions.", btn1: "Start Studying", loading: "Preparing...", card2_title: "Original Material", card2_desc: "Browse the original PDF file of the lecture.", btn2: "View PDF", langTxt: "عربي" }
         };
         let lang = localStorage.getItem('globalLang') || 'ar';
         let theme = localStorage.getItem('globalTheme') || 'light';

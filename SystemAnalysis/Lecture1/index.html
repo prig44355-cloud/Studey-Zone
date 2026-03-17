@@ -2,32 +2,50 @@
 <html lang="ar" dir="rtl" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>محتويات المحاضرة الأولى | المنصة التعليمية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-    :root {
-            --bg-body: #f0f4f8; --text-main: #1e293b; --header-bg: #ffffff;
-            --card-active: linear-gradient(135deg, #f6d365 0%, #fda085 100%); 
+        :root {
+            /* ألوان مادة نظم التشغيل (متوافقة مع باقي الصفحات) */
+            --bg-body: #f8fafc; 
+            --text-main: #1e293b; 
+            --header-bg: rgba(255, 255, 255, 0.98);
+            --primary: #0f172a; 
+            --accent: #10b981;
+            
+            /* ألوان الكروت لتناسب هوية نظم التشغيل */
+            --card-active: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
             --card-locked: linear-gradient(135deg, #e2ebf0 0%, #cfd9df 100%);
-            --text-locked: #475569; --icon-color: #fda085; 
+            --text-locked: #475569; 
+            --icon-color: #10b981; /* أخضر زمردي */
         }
         [data-theme="dark"] {
-            --bg-body: #05071b; --text-main: #f8fafc; --header-bg: #05071b;
-            --card-active: linear-gradient(135deg, #b45309 0%, #78350f 100%);
+            --bg-body: #020617; 
+            --text-main: #f8fafc; 
+            --header-bg: rgba(2, 6, 23, 0.98);
+            --primary: #38bdf8;
+            --accent: #10b981;
+            
+            --card-active: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             --card-locked: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            --text-locked: #94a3b8; --icon-color: #f6d365; 
+            --text-locked: #94a3b8; 
+            --icon-color: #10b981; 
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
         body { background: var(--bg-body); color: var(--text-main); min-height: 100vh; overflow-x: hidden; -webkit-user-select: none; user-select: none; }
-        .navbar { display: flex; justify-content: space-between; align-items: center; background: var(--header-bg); padding: 15px 5%; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
-        .page-title { font-size: 1.5rem; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 10px; }
-        .header-actions { display: flex; align-items: center; gap: 15px; }
+        
+        /* إضافة تأثير الزجاج للهيدر ليتطابق مع باقي المنصة */
+        .navbar { display: flex; justify-content: space-between; align-items: center; background: var(--header-bg); backdrop-filter: blur(12px); border-bottom: 2px solid var(--primary); padding: 15px 5%; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 15px;}
+        .page-title { font-size: 1.5rem; font-weight: 900; color: var(--primary); display: flex; align-items: center; gap: 10px; text-align: center;}
+        .header-actions { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; justify-content: center;}
 
-        .cta-back { display: flex; align-items: center; padding: 8px 25px; text-decoration: none; font-size: 18px; font-weight: bold; color: white; background: #6225e6; transition: 1s; box-shadow: -5px 5px 0 var(--text-main); transform: skewX(15deg); border: none; cursor: pointer; }
-        [data-theme="dark"] .cta-back { background: var(--icon-color); color: #1e293b; box-shadow: -5px 5px 0 #ffffff; }
-        .cta-back:focus { outline: none; } .cta-back:hover { transition: 0.5s; box-shadow: -8px 8px 0 #fbc638; }
+        /* زر الرجوع الموحد (كحلي مع ظل أخضر) */
+        .cta-back { display: flex; align-items: center; justify-content: center; padding: 8px 25px; text-decoration: none; font-size: 18px; font-weight: bold; color: white; background: var(--primary); transition: 1s; box-shadow: -5px 5px 0 var(--text-main); transform: skewX(15deg); border: none; cursor: pointer; }
+        [data-theme="dark"] .cta-back { background: var(--primary); color: #000; box-shadow: -5px 5px 0 #ffffff; }
+        .cta-back:focus { outline: none; } .cta-back:hover { transition: 0.5s; box-shadow: -8px 8px 0 var(--accent); }
         .cta-back .span { transform: skewX(-15deg); font-family: 'Cairo'; }
         .cta-back .second { transition: 0.5s; margin-left: 0; margin-right: 15px; width: 25px; transform: rotate(180deg); display: flex; align-items: center;}
         .cta-back:hover .second { transition: 0.5s; margin-right: 35px; }
@@ -35,8 +53,9 @@
         .cta-back:hover .three { animation: color_anim 1s infinite 0.2s; }
         .cta-back:hover .one { transform: translateX(0%); animation: color_anim 1s infinite 0.6s; }
         .cta-back:hover .two { transform: translateX(0%); animation: color_anim 1s infinite 0.4s; }
-        @keyframes color_anim { 0% { fill: white; } 50% { fill: #fbc638; } 100% { fill: white; } }
+        @keyframes color_anim { 0% { fill: white; } 50% { fill: var(--accent); } 100% { fill: white; } }
 
+        /* أزرار الثيم واللغة */
         .theme-btn-wrapper { transform: scale(0.65); transform-origin: center right;} html[dir="ltr"] .theme-btn-wrapper { transform-origin: center left; }
         .toggleWrapper { overflow: hidden; color: white; display: flex; align-items: center;}
         .toggleWrapper .input-theme { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
@@ -77,24 +96,60 @@
         @keyframes drow1 { 0% { height: 0; } 100% { height: 100px; } } @keyframes drow2 { 0% { width: 0; opacity: 0; } 10% { opacity: 0; } 11% { opacity: 1; } 100% { width: 120px; } }
         @keyframes drow3 { 0% { width: 0; } 100% { width: 80px; } } @keyframes drow4 { 0% { height: 0; } 100% { height: 120px; } } @keyframes drow5 { 0% { width: 0; } 100% { width: 124px; } }
 
-        .container { max-width: 1200px; margin: 50px auto; padding: 0 5%; }
-        .title { text-align: center; font-size: 1.8rem; font-weight: 900; margin-bottom: 50px; color: var(--text-main); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 35px; direction: rtl; }
+        /* الكروت */
+        .container { max-width: 1200px; margin: 50px auto; padding: 0 5%; width: 100%;}
+        .title { text-align: center; font-size: 1.8rem; font-weight: 900; margin-bottom: 50px; color: var(--primary); }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 35px; direction: rtl; }
+        
         .content-card { border-radius: 40px 10px 40px 10px; padding: 40px 20px 30px; position: relative; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.15); display: flex; flex-direction: column; transition: transform 0.4s, box-shadow 0.4s; border: 1px solid rgba(255,255,255,0.2); }
-        .active-card { background: var(--card-active); color: white; }
-        .active-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+        
+        .active-card { background: var(--card-active); color: white; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .active-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(16, 185, 129, 0.2); }
+        
         .floating-icon { position: absolute; top: -20px; right: -15px; background: var(--header-bg); width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); border: 4px solid var(--bg-body); transition: 0.3s; color: var(--icon-color); }
-        .content-card h3 { font-size: 1.5rem; margin-bottom: 15px; font-weight: 900; }
-        .content-card p { margin-bottom: 30px; flex-grow: 1; font-size: 1rem; opacity: 0.9;}
-        .btn-enter { font-size: 1.1rem; padding: 0.8rem 2.5rem; border: none; outline: none; border-radius: 0.4rem; cursor: pointer; background-color: rgb(14, 14, 26); color: rgb(234, 234, 234); font-weight: 700; transition: 0.6s; box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.4); text-decoration: none; display: inline-block; margin: auto auto 0; font-family: 'Cairo'; width: 100%; }
-        .btn-enter:hover { background: linear-gradient(270deg, rgba(2, 29, 78, 0.9) 0%, rgba(31, 215, 232, 0.9) 100%); color: #ffffff; }
-        .locked-card { background: var(--card-locked); color: var(--text-locked); border: 1px dashed var(--text-locked); opacity: 0.8;}
-        .locked-card .floating-icon { color: var(--text-locked); filter: grayscale(100%); }
-        .spinner-container { display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: auto;}
-        .spinner { width: 3em; height: 3em; border-radius: 50%; border: 2px solid transparent; box-shadow: -10px -10px 10px #6359f8, 0px -10px 10px 0px #9c32e2, 10px -10px 10px #f36896, 10px 0 10px #ff0b0b, 10px 10px 10px 0px #ff5500, 0 10px 10px 0px #ff9500, -10px 10px 10px 0px #ffb700; animation: rot55 0.7s linear infinite; position: relative; }
-        .spinnerin { border: 2px solid var(--text-locked); width: 1.5em; height: 1.5em; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-        @keyframes rot55 { to { transform: rotate(360deg); } }
-        @media (max-width: 768px) { .navbar { flex-direction: column-reverse; gap: 20px; padding: 20px;} .header-actions { justify-content: space-between; width: 100%;} .floating-icon { top: -20px; right: -15px; width: 60px; height: 60px; font-size: 22px;} }
+        
+        .content-card h3 { font-size: 1.5rem; margin-bottom: 15px; font-weight: 900; color: var(--icon-color); }
+        .content-card p { margin-bottom: 30px; flex-grow: 1; font-size: 1rem; opacity: 0.9; color: #f8fafc;}
+        
+        /* زر الدخول للمحاضرة */
+        .btn-enter { font-size: 1.1rem; padding: 0.8rem 2.5rem; border: none; outline: none; border-radius: 0.4rem; cursor: pointer; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(16, 185, 129, 0.5); backdrop-filter: blur(5px); color: #fff; font-weight: 700; transition: 0.6s; text-decoration: none; display: inline-block; margin: auto auto 0; font-family: 'Cairo'; width: 100%; }
+        .btn-enter:hover { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4); }
+
+        /* --------------------------------------------------- */
+        /* --- Media Queries (لتجاوب الشاشات بمختلف أحجامها) --- */
+        /* --------------------------------------------------- */
+
+        @media (max-width: 768px) { 
+            .navbar { flex-direction: column-reverse; padding: 20px; gap: 20px; } 
+            .header-actions { justify-content: center; flex-wrap: wrap; width: 100%; gap: 15px;}
+            .floating-icon { top: -20px; right: -10px; width: 55px; height: 55px; font-size: 22px;} 
+            .container { margin: 30px auto; padding: 0 15px; }
+            .title { font-size: 1.5rem; margin-bottom: 40px; }
+            .grid { gap: 25px; }
+        }
+
+        @media (max-width: 480px) {
+            .navbar { padding: 15px; gap: 15px; }
+            .page-title { font-size: 1.3rem; text-align: center; }
+            .header-actions { gap: 10px; justify-content: center; flex-direction: row-reverse; }
+            
+            .theme-btn-wrapper { transform: scale(0.55); margin: 0 -15px; }
+            .lang-btn-wrapper { transform: scale(0.55); margin: 0 -15px; }
+            
+            .cta-back { padding: 8px 15px; font-size: 15px; transform: skewX(10deg); width: 100%; max-width: 250px; justify-content: center;}
+            .cta-back .span { transform: skewX(-10deg); }
+            .cta-back .second { margin-right: 10px; width: 20px; }
+            
+            .title { font-size: 1.35rem; margin-bottom: 35px; }
+            
+            .grid { grid-template-columns: 1fr; gap: 30px; }
+            
+            .content-card { padding: 35px 15px 25px; }
+            .content-card h3 { font-size: 1.3rem; }
+            .content-card p { font-size: 0.95rem; }
+            .btn-enter { font-size: 1rem; padding: 0.8rem 1.5rem; }
+        }
     </style>
 </head>
 <body>
@@ -116,23 +171,25 @@
                     <div class="button__drow1"></div><div class="button__drow2"></div>
                 </a>
             </div>
-            <button class="cta-back" onclick="window.location.href='../index.html'">
-                <span class="second"><svg viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><path class="one" d="M40.15,3.89 L43.97,0.13 L65.69,20.78 L44.67,42.86 L40.15,39.10 L56.99,21.85 Z" fill="#FFFFFF"></path><path class="two" d="M20.15,3.89 L23.97,0.13 L45.69,20.78 L24.67,42.86 L20.15,39.10 L36.99,21.85 Z" fill="#FFFFFF"></path><path class="three" d="M0.15,3.89 L3.97,0.13 L25.69,20.78 L4.67,42.86 L0.15,39.10 L16.99,21.85 Z" fill="#FFFFFF"></path></g></svg></span>
+            <button class="cta-back" onclick="window.location.href='index.html'">
+                <span class="second"><svg viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><path class="one" d="M40.15,3.89 L43.97,0.13 L65.69,20.78 L44.67,42.86 L40.15,39.10 L56.99,21.85 Z" fill="#FFFFFF"></path><path class="two" d="M20.15,3.89 L23.97,0.13 L45.69,20.78 L24.67,42.86 L20.15,39.10 L36.99,21.85 Z" fill="#FFFFFF"></path><path class="three" d="M0.15,3.89 L3.97,0.13 L25.69,20.78 L4.67,42.86 L0.15,39.10 L16.99,21.85 Z" fill="#FFFFFF"></path></g></svg></span>
                 <span class="span" data-i18n="back_to_subject">عودة للمادة</span>
             </button>
         </div>
     </header>
+
     <main class="container">
         <h1 class="title" data-i18n="select_content">اختر مسار المذاكرة 📂</h1>
         <div class="grid">
-            
+
             <div class="content-card active-card">
                 <div class="floating-icon"><i class="fa-solid fa-laptop-code"></i></div>
                 <h3 data-i18n="card1_title">الشرح التفاعلي</h3>
                 <p data-i18n="card1_desc">ذاكر المحاضرة بنظام الشرائح التفاعلية والأسئلة.</p>
                 <a href="interactive.html" class="btn-enter" data-i18n="btn1">ابدأ المذاكرة</a>
             </div>
-            
+
             <div class="content-card active-card">
                 <div class="floating-icon"><i class="fa-solid fa-file-pdf"></i></div>
                 <h3 data-i18n="card2_title">الماتيريال الأصلي</h3>
@@ -142,23 +199,52 @@
 
         </div>
     </main>
+
     <script>
         const dict = {
-            ar: { btn1: "ابدأ المذاكرة", lec_title: "المحاضرة الأولى", back_to_subject: "رجوع للمادة", select_content: "اختر مسار المذاكرة 📂", card1_title: "الشرح التفاعلي", card1_desc: "ذاكر المحاضرة بنظام الشرائح التفاعلية والأسئلة.", loading: "جاري التجهيز...", card2_title: "الماتيريال الأصلي", card2_desc: "تصفح ملف الـ PDF الخاص بالمحاضرة.", btn2: "عرض الـ PDF", card3_title: "المحاضرة المشروحة", card3_desc: "تفريغ وشرح مبسط لشرائح المحاضرة باللغة العربية.", btn3: "قراءة الشرح", langTxt: "EN" },
-            en: { btn1: "Start Studying", lec_title: "First Lecture", back_to_subject: "Back to Subject", select_content: "Choose Study Path 📂", card1_title: "Interactive Study", card1_desc: "Study the lecture with interactive slides and questions.", loading: "Preparing...", card2_title: "Original Material", card2_desc: "Browse the original PDF file of the lecture.", btn2: "View PDF", card3_title: "Explained Lecture", card3_desc: "Simplified transcript and explanation of the slides.", btn3: "Read Explanation", langTxt: "عربي" }
+            ar: { btn1: "ابدأ المذاكرة", lec_title: "المحاضرة الأولى", back_to_subject: "رجوع للمادة", select_content: "اختر مسار المذاكرة 📂", card1_title: "الشرح التفاعلي", card1_desc: "ذاكر المحاضرة بنظام الشرائح التفاعلية والأسئلة.", loading: "جاري التجهيز...", card2_title: "الماتيريال الأصلي", card2_desc: "تصفح ملف الـ PDF الخاص بالمحاضرة.", btn2: "عرض الـ PDF", langTxt: "EN" },
+            en: { btn1: "Start Studying", lec_title: "First Lecture", back_to_subject: "Back to Subject", select_content: "Choose Study Path 📂", card1_title: "Interactive Study", card1_desc: "Study the lecture with interactive slides and questions.", loading: "Preparing...", card2_title: "Original Material", card2_desc: "Browse the original PDF file of the lecture.", btn2: "View PDF", langTxt: "عربي" }
         };
+        
         let lang = localStorage.getItem('globalLang') || 'ar';
         let theme = localStorage.getItem('globalTheme') || 'light';
         const themeToggle = document.getElementById('themeToggleCheck');
+        
         function initPlatform() { 
             if(theme === 'dark') { themeToggle.checked = true; document.documentElement.setAttribute('data-theme', 'dark'); } 
             else { themeToggle.checked = false; document.documentElement.setAttribute('data-theme', 'light'); }
             applyLang(lang); 
         }
-        themeToggle.addEventListener('change', (e) => { theme = e.target.checked ? 'dark' : 'light'; document.documentElement.setAttribute('data-theme', theme); localStorage.setItem('globalTheme', theme); });
-        function toggleLangTrigger() { lang = lang === 'ar' ? 'en' : 'ar'; localStorage.setItem('globalLang', lang); applyLang(lang); }
-        function applyLang(l) { document.documentElement.lang = l; document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr'; document.querySelectorAll('.langText').forEach(el => el.innerText = dict[l].langTxt); document.querySelectorAll('[data-i18n]').forEach(el => { if(dict[l][el.getAttribute('data-i18n')]) el.innerText = dict[l][el.getAttribute('data-i18n')]; }); }
-        document.addEventListener('contextmenu', e => e.preventDefault()); document.ondragstart = () => false; document.addEventListener('keydown', e => { if (e.key === 'F12' || e.keyCode === 123) return false; if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'C')) return false; if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 'P')) return false; });
+        
+        themeToggle.addEventListener('change', (e) => { 
+            theme = e.target.checked ? 'dark' : 'light'; 
+            document.documentElement.setAttribute('data-theme', theme); 
+            localStorage.setItem('globalTheme', theme); 
+        });
+        
+        function toggleLangTrigger() { 
+            lang = lang === 'ar' ? 'en' : 'ar'; 
+            localStorage.setItem('globalLang', lang); 
+            applyLang(lang); 
+        }
+        
+        function applyLang(l) { 
+            document.documentElement.lang = l; 
+            document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr'; 
+            document.querySelectorAll('.langText').forEach(el => el.innerText = dict[l].langTxt); 
+            document.querySelectorAll('[data-i18n]').forEach(el => { 
+                if(dict[l][el.getAttribute('data-i18n')]) el.innerText = dict[l][el.getAttribute('data-i18n')]; 
+            }); 
+        }
+        
+        document.addEventListener('contextmenu', e => e.preventDefault()); 
+        document.ondragstart = () => false; 
+        document.addEventListener('keydown', e => { 
+            if (e.key === 'F12' || e.keyCode === 123) return false; 
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'C')) return false; 
+            if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 'P')) return false; 
+        });
+        
         window.onload = initPlatform;
     </script>
 </body>

@@ -130,6 +130,9 @@
             color: var(--icon-color);
         }
 
+        /* تعديل اتجاه الأيقونة عند تبديل اللغة LTR */
+        html[dir="ltr"] .floating-icon { right: auto; left: -15px; }
+
         .content-card h3 { font-size: 1.5rem; margin-bottom: 15px; font-weight: 900; }
         .content-card p { margin-bottom: 30px; flex-grow: 1; font-size: 1rem; opacity: 0.9;}
         
@@ -154,10 +157,32 @@
         .spinnerin { border: 2px solid var(--text-locked); width: 1.5em; height: 1.5em; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
         @keyframes rot55 { to { transform: rotate(360deg); } }
 
+        /* الشاشات المتوسطة والأجهزة اللوحية (التابلت) */
         @media (max-width: 768px) { 
-            .navbar { flex-direction: column-reverse; gap: 20px; padding: 20px;} 
-            .header-actions { justify-content: space-between; width: 100%;}
-            .floating-icon { top: -20px; right: -15px; width: 60px; height: 60px; font-size: 22px;}
+            .navbar { flex-direction: column-reverse; gap: 15px; padding: 15px 5%;} 
+            .header-actions { justify-content: center; flex-wrap: wrap; width: 100%; gap: 15px;}
+            .floating-icon { top: -20px; right: -10px; width: 55px; height: 55px; font-size: 22px;}
+            html[dir="ltr"] .floating-icon { left: -10px; right: auto; }
+            .page-title { font-size: 1.3rem; text-align: center; }
+            .title { font-size: 1.5rem; margin-bottom: 30px; }
+            .grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        }
+
+        /* الهواتف الذكية الصغيرة */
+        @media (max-width: 480px) {
+            .navbar { padding: 12px 5%; }
+            .header-actions { gap: 10px; }
+            .theme-btn-wrapper { transform: scale(0.60); }
+            .lang-btn-wrapper { transform: scale(0.55); }
+            .cta-back { font-size: 14px; padding: 6px 15px; }
+            .cta-back .second { width: 18px; margin-right: 8px; }
+            .cta-back:hover .second { margin-right: 15px; }
+            .page-title { font-size: 1.1rem; }
+            .title { font-size: 1.3rem; margin-top: 10px; margin-bottom: 25px; }
+            /* جعل التصميم بعمود واحد على الشاشات الصغيرة لتجنب الخروج عن حواف الشاشة */
+            .grid { grid-template-columns: 1fr; gap: 30px; }
+            .content-card { padding: 35px 15px 20px; }
+            .btn-enter { font-size: 1rem; padding: 0.7rem 1.5rem; }
         }
     </style>
 </head>
@@ -192,12 +217,11 @@
     <main class="container">
         <h1 class="title" data-i18n="select_content">اختر مسار المذاكرة 📂</h1>
         <div class="grid">
-                    <div class="content-card active-card">
-                    <div class="floating-icon"><i class="fa-solid fa-laptop-code"></i></div>
-                    <h3 data-i18n="card1_title">الشرح التفاعلي</h3>
-                    <p data-i18n="card1_desc">ذاكر المحاضرة بنظام الشرائح التفاعلية والأسئلة.</p>
-    
-                    <a href="interactive.html" class="btn-enter" data-i18n="btn1">بدء المذاكرة</a>
+            <div class="content-card active-card">
+                <div class="floating-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                <h3 data-i18n="card1_title">الشرح التفاعلي</h3>
+                <p data-i18n="card1_desc">ذاكر المحاضرة بنظام الشرائح التفاعلية والأسئلة.</p>
+                <a href="interactive.html" class="btn-enter" data-i18n="btn1">بدء المذاكرة</a>
             </div>
             <div class="content-card active-card">
                 <div class="floating-icon"><i class="fa-solid fa-file-pdf"></i></div>
@@ -254,20 +278,6 @@
                 if(dict[l][el.getAttribute('data-i18n')]) el.innerText = dict[l][el.getAttribute('data-i18n')]; 
             });
         }
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
 
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.ondragstart = () => false;

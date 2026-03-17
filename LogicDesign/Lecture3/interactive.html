@@ -8,22 +8,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
+            /* الألوان الأساسية للمحاضرة الثانية: الكحلي والذهبي */
             --bg-gradient-light: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
             --glass-bg-light: rgba(255, 255, 255, 0.95);
             --glass-border-light: rgba(255, 255, 255, 0.6);
             --text-main-light: #2d3748;
-            --primary-light: #4c51bf; 
-            --accent-light: #ed8936;  
+            --primary-light: #1a365d; 
+            --accent-light: #d69e2e;  
             --header-bg-light: rgba(255, 255, 255, 0.98);
             --success: #38a169;
             --error: #e53e3e;
 
+            /* الوضع الداكن */
             --bg-gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
             --glass-bg-dark: rgba(30, 41, 59, 0.95);
             --glass-border-dark: rgba(255, 255, 255, 0.1);
             --text-main-dark: #f1f5f9;
-            --primary-dark: #7f9cf5;
-            --accent-dark: #fbd38d;
+            --primary-dark: #63b3ed;
+            --accent-dark: #fca311;
             --header-bg-dark: rgba(15, 23, 42, 0.98);
 
             --bg-body: var(--bg-gradient-light);
@@ -97,12 +99,12 @@
         .card { background: var(--glass); width: 100%; max-width: 900px; padding: 30px; border-radius: 20px; border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 30px; animation: slideUp 0.5s ease-out; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        .badge { display: inline-block; padding: 5px 15px; border-radius: 50px; background: rgba(76, 81, 191, 0.15); color: var(--primary); font-weight: bold; font-size: 0.8rem; margin-bottom: 15px; }
+        .badge { display: inline-block; padding: 5px 15px; border-radius: 50px; background: rgba(214, 158, 46, 0.15); color: var(--accent); font-weight: bold; font-size: 0.8rem; margin-bottom: 15px; }
         h1 { font-size: 1.6rem; margin-bottom: 20px; line-height: 1.4; color: var(--primary); }
         .content { font-size: 1.1rem; line-height: 1.8; margin-bottom: 25px; color: var(--text); }
         ul, ol { padding-inline-start: 20px; margin-bottom: 15px; } li { margin-bottom: 10px; }
         
-        .method-box { background: rgba(76, 81, 191, 0.05); border-inline-start: 4px solid var(--primary); padding: 15px; margin: 15px 0; border-radius: 8px; }
+        .method-box { background: rgba(26, 54, 93, 0.05); border-inline-start: 4px solid var(--primary); padding: 15px; margin: 15px 0; border-radius: 8px; }
         [data-theme="dark"] .method-box { background: rgba(255, 255, 255, 0.05); }
 
         /* ==================== تنسيقات جداول الحقيقة (Truth Tables) ==================== */
@@ -111,8 +113,28 @@
         .truth-table td { padding: 10px; border: 1px solid var(--border); font-size: 1.1rem; font-weight: bold; color: var(--text); }
         .truth-table tr:nth-child(even) { background-color: rgba(0,0,0,0.02); }
         [data-theme="dark"] .truth-table tr:nth-child(even) { background-color: rgba(255,255,255,0.02); }
-        .truth-table .output-col { background-color: rgba(237, 137, 54, 0.15); color: var(--accent); }
-        
+        .truth-table .output-col { background-color: rgba(214, 158, 46, 0.15); color: var(--accent); }
+        /* ========================================================================= */
+
+        /* ==================== CSS الخاص بالمحاكاة (Simulator) ==================== */
+        .simulator-box { background: rgba(0,0,0,0.03); border: 2px dashed var(--primary); border-radius: 15px; padding: 20px; text-align: center; margin-top: 20px; position: relative; }
+        [data-theme="dark"] .simulator-box { background: rgba(255,255,255,0.03); }
+        .sim-gate-select { padding: 10px; font-size: 1.2rem; border-radius: 8px; border: 2px solid var(--primary); font-family: 'Cairo'; background: var(--glass); color: var(--text); margin-bottom: 20px; outline: none; cursor: pointer; }
+        .sim-controls { display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .switch-container { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .switch-label { font-size: 1.2rem; font-weight: bold; color: var(--text); }
+        .switch { position: relative; display: inline-block; width: 60px; height: 34px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2);}
+        input:checked + .slider { background-color: var(--primary); }
+        input:checked + .slider:before { transform: translateX(26px); }
+        input:disabled + .slider { opacity: 0.3; cursor: not-allowed; }
+        .output-container { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px; border: 2px solid var(--border); border-radius: 15px; background: var(--header-bg); }
+        .bulb { width: 60px; height: 60px; border-radius: 50%; background: #4a5568; transition: all 0.3s ease; box-shadow: inset 0 -10px 15px rgba(0,0,0,0.5); position: relative; }
+        .bulb::after { content: ''; position: absolute; bottom: -15px; left: 15px; width: 30px; height: 15px; background: #718096; border-radius: 0 0 5px 5px; }
+        .bulb.on { background: var(--accent); box-shadow: 0 0 40px var(--accent), inset 0 -10px 15px rgba(255,255,255,0.5); }
+        .sim-result-text { font-size: 2rem; font-weight: 900; color: var(--text); }
         /* ========================================================================= */
 
         .practice-item { background: rgba(0,0,0,0.03); border: 1px solid var(--border); padding: 20px; border-radius: 12px; margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px; }
@@ -130,21 +152,21 @@
         .quiz-a { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--border); color: var(--text); font-weight:bold;}
         .quiz-item.revealed .quiz-a { display: block; animation: fadeIn 0.3s; }
 
-        .bb8-toggle { --toggle-size: 4px; --toggle-width: 10.625em; --toggle-height: 5.625em; --toggle-offset: calc((var(--toggle-height) - var(--bb8-diameter)) / 2); --toggle-bg: linear-gradient(#2c4770, #070e2b 35%, #628cac 50% 70%, #a6c5d4) no-repeat; --bb8-diameter: 4.375em; --radius: 99em; --transition: 0.4s; --accent: #de7d2f; --bb8-bg: #fff; cursor: pointer; font-size: var(--toggle-size); display: inline-block; }
+        .bb8-toggle { --toggle-size: 4px; --toggle-width: 10.625em; --toggle-height: 5.625em; --toggle-offset: calc((var(--toggle-height) - var(--bb8-diameter)) / 2); --toggle-bg: linear-gradient(#2c4770, #070e2b 35%, #628cac 50% 70%, #a6c5d4) no-repeat; --bb8-diameter: 4.375em; --radius: 99em; --transition: 0.4s; --accent-bb8: #de7d2f; --bb8-bg: #fff; cursor: pointer; font-size: var(--toggle-size); display: inline-block; }
         .bb8-toggle *, .bb8-toggle *::before, .bb8-toggle *::after { box-sizing: border-box; }
         .bb8-toggle__checkbox { appearance: none; display: none; }
         .bb8-toggle__container { width: var(--toggle-width); height: var(--toggle-height); background: var(--toggle-bg); background-size: 100% 11.25em; background-position-y: -5.625em; border-radius: var(--radius); position: relative; transition: var(--transition); }
         .bb8 { display: flex; flex-direction: column; align-items: center; position: absolute; top: calc(var(--toggle-offset) - 1.688em + 0.188em); left: var(--toggle-offset); transition: var(--transition); z-index: 2; }
         .bb8__head-container { position: relative; transition: var(--transition); z-index: 2; transform-origin: 1.25em 3.75em; }
-        .bb8__head { overflow: hidden; margin-bottom: -0.188em; width: 2.5em; height: 1.688em; background: linear-gradient(transparent 0.063em, dimgray 0.063em 0.313em, transparent 0.313em 0.375em, var(--accent) 0.375em 0.5em, transparent 0.5em 1.313em, silver 1.313em 1.438em, transparent 1.438em), linear-gradient(45deg, transparent 0.188em, var(--bb8-bg) 0.188em 1.25em, transparent 1.25em), linear-gradient(-45deg, transparent 0.188em, var(--bb8-bg) 0.188em 1.25em, transparent 1.25em), linear-gradient(var(--bb8-bg) 1.25em, transparent 1.25em); border-radius: var(--radius) var(--radius) 0 0; position: relative; z-index: 1; filter: drop-shadow(0 0.063em 0.125em gray); }
+        .bb8__head { overflow: hidden; margin-bottom: -0.188em; width: 2.5em; height: 1.688em; background: linear-gradient(transparent 0.063em, dimgray 0.063em 0.313em, transparent 0.313em 0.375em, var(--accent-bb8) 0.375em 0.5em, transparent 0.5em 1.313em, silver 1.313em 1.438em, transparent 1.438em), linear-gradient(45deg, transparent 0.188em, var(--bb8-bg) 0.188em 1.25em, transparent 1.25em), linear-gradient(-45deg, transparent 0.188em, var(--bb8-bg) 0.188em 1.25em, transparent 1.25em), linear-gradient(var(--bb8-bg) 1.25em, transparent 1.25em); border-radius: var(--radius) var(--radius) 0 0; position: relative; z-index: 1; filter: drop-shadow(0 0.063em 0.125em gray); }
         .bb8__head::before { content: ""; position: absolute; width: 0.563em; height: 0.563em; background: radial-gradient(0.125em circle at 0.25em 0.375em, red, transparent), radial-gradient(0.063em circle at 0.375em 0.188em, var(--bb8-bg) 50%, transparent 100%), linear-gradient(45deg, #000 0.188em, dimgray 0.313em 0.375em, #000 0.5em); border-radius: var(--radius); top: 0.413em; left: 50%; transform: translate(-50%); box-shadow: 0 0 0 0.089em lightgray, 0.563em 0.281em 0 -0.148em, 0.563em 0.281em 0 -0.1em var(--bb8-bg), 0.563em 0.281em 0 -0.063em; z-index: 1; transition: var(--transition); }
-        .bb8__head::after { content: ""; position: absolute; bottom: 0.375em; left: 0; width: 100%; height: 0.188em; background: linear-gradient(to right, var(--accent) 0.125em, transparent 0.125em 0.188em, var(--accent) 0.188em 0.313em, transparent 0.313em 0.375em, var(--accent) 0.375em 0.938em, transparent 0.938em 1em, var(--accent) 1em 1.125em, transparent 1.125em 1.875em, var(--accent) 1.875em 2em, transparent 2em 2.063em, var(--accent) 2.063em 2.25em, transparent 2.25em 2.313em, var(--accent) 2.313em 2.375em, transparent 2.375em 2.438em, var(--accent) 2.438em); transition: var(--transition); }
+        .bb8__head::after { content: ""; position: absolute; bottom: 0.375em; left: 0; width: 100%; height: 0.188em; background: linear-gradient(to right, var(--accent-bb8) 0.125em, transparent 0.125em 0.188em, var(--accent-bb8) 0.188em 0.313em, transparent 0.313em 0.375em, var(--accent-bb8) 0.375em 0.938em, transparent 0.938em 1em, var(--accent-bb8) 1em 1.125em, transparent 1.125em 1.875em, var(--accent-bb8) 1.875em 2em, transparent 2em 2.063em, var(--accent-bb8) 2.063em 2.25em, transparent 2.25em 2.313em, var(--accent-bb8) 2.313em 2.375em, transparent 2.375em 2.438em, var(--accent-bb8) 2.438em); transition: var(--transition); }
         .bb8__antenna { position: absolute; transform: translateY(-90%); width: 0.059em; border-radius: var(--radius) var(--radius) 0 0; transition: var(--transition); }
         .bb8__antenna:nth-child(1) { height: 0.938em; right: 0.938em; background: linear-gradient(#000 0.188em, silver 0.188em); }
         .bb8__antenna:nth-child(2) { height: 0.375em; left: 50%; transform: translate(-50%, -90%); background: silver; }
-        .bb8__body { width: 4.375em; height: 4.375em; background: var(--bb8-bg); border-radius: var(--radius); position: relative; overflow: hidden; transition: var(--transition); z-index: 1; transform: rotate(45deg); background: linear-gradient(-90deg, var(--bb8-bg) 4%, var(--accent) 4% 10%, transparent 10% 90%, var(--accent) 90% 96%, var(--bb8-bg) 96%), linear-gradient(var(--bb8-bg) 4%, var(--accent) 4% 10%, transparent 10% 90%, var(--accent) 90% 96%, var(--bb8-bg) 96%), linear-gradient(to right, transparent 2.156em, silver 2.156em 2.219em, transparent 2.188em), linear-gradient(transparent 2.156em, silver 2.156em 2.219em, transparent 2.188em); background-color: var(--bb8-bg); }
+        .bb8__body { width: 4.375em; height: 4.375em; background: var(--bb8-bg); border-radius: var(--radius); position: relative; overflow: hidden; transition: var(--transition); z-index: 1; transform: rotate(45deg); background: linear-gradient(-90deg, var(--bb8-bg) 4%, var(--accent-bb8) 4% 10%, transparent 10% 90%, var(--accent-bb8) 90% 96%, var(--bb8-bg) 96%), linear-gradient(var(--bb8-bg) 4%, var(--accent-bb8) 4% 10%, transparent 10% 90%, var(--accent-bb8) 90% 96%, var(--bb8-bg) 96%), linear-gradient(to right, transparent 2.156em, silver 2.156em 2.219em, transparent 2.188em), linear-gradient(transparent 2.156em, silver 2.156em 2.219em, transparent 2.188em); background-color: var(--bb8-bg); }
         .bb8__body::after { content: ""; bottom: 1.5em; left: 0.563em; position: absolute; width: 0.188em; height: 0.188em; background: rgb(236, 236, 236); border-radius: 50%; box-shadow: 0.875em 0.938em, 0 -1.25em, 0.875em -2.125em, 2.125em -2.125em, 3.063em -1.25em, 3.063em 0, 2.125em 0.938em; }
-        .bb8__body::before { content: ""; width: 2.625em; height: 2.625em; position: absolute; border-radius: 50%; z-index: 0.1; overflow: hidden; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 0.313em solid var(--accent); background: radial-gradient(1em circle at center, rgb(236, 236, 236) 50%, transparent 51%), radial-gradient(1.25em circle at center, var(--bb8-bg) 50%, transparent 51%), linear-gradient(-90deg, transparent 42%, var(--accent) 42% 58%, transparent 58%), linear-gradient(var(--bb8-bg) 42%, var(--accent) 42% 58%, var(--bb8-bg) 58%); }
+        .bb8__body::before { content: ""; width: 2.625em; height: 2.625em; position: absolute; border-radius: 50%; z-index: 0.1; overflow: hidden; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 0.313em solid var(--accent-bb8); background: radial-gradient(1em circle at center, rgb(236, 236, 236) 50%, transparent 51%), radial-gradient(1.25em circle at center, var(--bb8-bg) 50%, transparent 51%), linear-gradient(-90deg, transparent 42%, var(--accent-bb8) 42% 58%, transparent 58%), linear-gradient(var(--bb8-bg) 42%, var(--accent-bb8) 42% 58%, var(--bb8-bg) 58%); }
         .artificial__hidden { position: absolute; border-radius: inherit; inset: 0; pointer-events: none; overflow: hidden; }
         .bb8__shadow { content: ""; width: var(--bb8-diameter); height: 20%; border-radius: 50%; background: #3a271c; box-shadow: 0.313em 0 3.125em #3a271c; opacity: 0.25; position: absolute; bottom: 0; left: calc(var(--toggle-offset) - 0.938em); transition: var(--transition); transform: skew(-70deg); z-index: 1; }
         .bb8-toggle__scenery { width: 100%; height: 100%; pointer-events: none; overflow: hidden; position: relative; border-radius: inherit; }
@@ -158,7 +180,7 @@
 
         .nav-actions { display: flex; gap: 30px; margin-top: 30px; justify-content: center; flex-wrap: wrap; }
         .styled-btn { position: relative; width: 140px; height: 50px; background: transparent; border: none; font-weight: bold; color: var(--text); cursor: pointer; font-family: 'Cairo'; font-size: 14px; }
-        .clip-box { --color: var(--primary); position: absolute; top: 0; left: 0; overflow: hidden; width: 100%; height: 100%; border: 5px double var(--color); box-shadow: inset 0px 0px 15px rgba(76, 81, 191, 0.3); -webkit-clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%); clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%); }
+        .clip-box { --color: var(--primary); position: absolute; top: 0; left: 0; overflow: hidden; width: 100%; height: 100%; border: 5px double var(--color); box-shadow: inset 0px 0px 15px rgba(26, 54, 93, 0.3); -webkit-clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%); clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%); }
         .arrow { position: absolute; transition: 0.2s; background-color: var(--primary); top: 35%; width: 11%; height: 30%; }
         .leftArrow { left: -13.5%; -webkit-clip-path: polygon(100% 0, 100% 100%, 0 50%); clip-path: polygon(100% 0, 100% 100%, 0 50%); }
         .rightArrow { -webkit-clip-path: polygon(100% 49%, 0 0, 0 100%); clip-path: polygon(100% 49%, 0 0, 0 100%); left: 102%; }
@@ -205,7 +227,7 @@
             <button class="menu-btn" onclick="toggleSidebar()">☰</button>
             <button class="cta-back" onclick="window.location.href='../index.html'">
                 <span class="second"><svg viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><path class="one" d="M40.15,3.89 L43.97,0.13 L65.69,20.78 L44.67,42.86 L40.15,39.10 L56.99,21.85 Z" fill="#FFFFFF"></path><path class="two" d="M20.15,3.89 L23.97,0.13 L45.69,20.78 L24.67,42.86 L20.15,39.10 L36.99,21.85 Z" fill="#FFFFFF"></path><path class="three" d="M0.15,3.89 L3.97,0.13 L25.69,20.78 L4.67,42.86 L0.15,39.10 L16.99,21.85 Z" fill="#FFFFFF"></path></g></svg></span>
-                <span class="span">الرجوع</span>
+                <span class="span" id="backBtnText">الرجوع</span>
             </button>
         </div>
         
@@ -252,19 +274,20 @@
                 <span class="badge" id="slideBadge">شريحة</span>
                 <h1 id="slideHeader">العنوان</h1>
                 <div class="content" id="slideHtml"></div>
+                <div id="simulatorContainer" style="display: none;"></div>
                 <div id="practiceContainer" style="display: none; margin-top: 20px;"></div>
                 <div id="quizContainer" style="display: none; margin-top: 20px;"></div>
 
                 <div class="nav-actions">
                     <button class="styled-btn" id="prevBtn" onclick="move(-1)">
-                        <span style="position:relative; z-index:2;">السابق</span>
+                        <span style="position:relative; z-index:2;" id="prevText">السابق</span>
                         <div class="clip-box">
                             <div class="leftTop corner"></div><div class="rightBottom corner"></div><div class="rightTop corner"></div><div class="leftBottom corner"></div>
                         </div>
                         <span class="rightArrow arrow"></span><span class="leftArrow arrow"></span>
                     </button>
                     <button class="styled-btn" id="nextBtn" onclick="move(1)">
-                        <span style="position:relative; z-index:2;">التالي</span>
+                        <span style="position:relative; z-index:2;" id="nextText">التالي</span>
                         <div class="clip-box">
                             <div class="leftTop corner"></div><div class="rightBottom corner"></div><div class="rightTop corner"></div><div class="leftBottom corner"></div>
                         </div>
@@ -273,7 +296,9 @@
                 </div>
             </div>
         </main>
-    </div><script>
+    </div>
+
+<script>
     // ==========================================
     // DATA: Digital Fundamentals - Logic Gates
     // ==========================================
@@ -533,8 +558,25 @@
             `
         },
         {
-            title: "8. ساحة التدريب والمحاكاة ⚔️",
-            title_en: "8. Practice Arena ⚔️",
+            title: "8. معمل المحاكاة التفاعلي 🔬",
+            title_en: "8. Interactive Logic Simulator 🔬",
+            badge: "تطبيق عملي",
+            badge_en: "Live Coding",
+            isSimulator: true,
+            content: `
+                <p style="text-align:center; font-weight:bold; color:var(--primary);">
+                    اختر البوابة المنطقية، ثم قم بتغيير قيم المدخلات (A و B) لتشاهد كيف يتأثر المخرج (اللمبة) برمجياً في الوقت الفعلي!
+                </p>
+            `,
+            content_en: `
+                <p style="text-align:center; font-weight:bold; color:var(--primary);">
+                    Select a logic gate, then toggle the inputs (A and B) to see how the output (the bulb) reacts in real-time!
+                </p>
+            `
+        },
+        {
+            title: "9. ساحة التدريب والمحاكاة ⚔️",
+            title_en: "9. Practice Arena ⚔️",
             badge: "تطبيق عملي",
             badge_en: "Practice",
             isPracticeSlide: true,
@@ -542,8 +584,8 @@
             content_en: `<p style="margin-bottom: 20px; font-weight: bold; color: var(--primary);">Test your knowledge on Logic Gates! (Answer in English).</p>`
         },
         {
-            title: "9. بنك الأسئلة الشامل (Quiz) 🎓",
-            title_en: "9. Comprehensive Quiz Bank 🎓",
+            title: "10. بنك الأسئلة الشامل (Quiz) 🎓",
+            title_en: "10. Comprehensive Quiz Bank 🎓",
             badge: "مراجعة الكويز",
             badge_en: "Quiz Review",
             isQuizSlide: true,
@@ -553,11 +595,11 @@
     ];
 
     const practiceQuestions = [
-        { q: "Which gate produces a HIGH output ONLY when all of its inputs are HIGH?", ans: "and" },
-        { q: "Which gate produces a HIGH output ONLY when the inputs agree (are the same)?", ans: "xnor" },
-        { q: "The expression X = A+B means 'A _____ B'. Fill in the blank.", ans: "or" },
-        { q: "What does the overbar symbol (like in X = Ā) represent?", ans: "not" },
-        { q: "A gate with inputs 0,0 and output 1, AND inputs 1,1 and output 0, could be?", ans: "nand" }
+        { q_en: "Which gate produces a HIGH output ONLY when all of its inputs are HIGH?", q_ar: "أي بوابة تعطي خرج (HIGH) فقط عندما تكون جميع مدخلاتها (HIGH)؟", ans: "and" },
+        { q_en: "Which gate produces a HIGH output ONLY when the inputs agree (are the same)?", q_ar: "أي بوابة تعطي خرج (HIGH) فقط عندما تكون المدخلات متطابقة؟", ans: "xnor" },
+        { q_en: "The expression X = A+B means 'A _____ B'. Fill in the blank.", q_ar: "المعادلة X = A+B تعني 'A _____ B'. املأ الفراغ.", ans: "or" },
+        { q_en: "What does the overbar symbol (like in X = Ā) represent?", q_ar: "ماذا يمثل رمز الخط فوق المتغير (مثل X = Ā)؟", ans: "not" },
+        { q_en: "A gate with inputs 0,0 and output 1, AND inputs 1,1 and output 0, could be?", q_ar: "بوابة مدخلاتها 0,0 تخرج 1، ومدخلاتها 1,1 تخرج 0، ما هي؟", ans: "nand" }
     ];
 
     const solvedQuizData = [
@@ -576,11 +618,12 @@
         content: document.getElementById('slideHtml'),
         badge: document.getElementById('slideBadge'),
         list: document.getElementById('list'),
-        prev: document.querySelector('#prevBtn span:first-child'),
-        next: document.querySelector('#nextBtn span:first-child'),
+        prev: document.getElementById('prevText'),
+        next: document.getElementById('nextText'),
         sidebar: document.getElementById('sidebar'),
         pracContainer: document.getElementById('practiceContainer'),
         quizContainer: document.getElementById('quizContainer'),
+        simContainer: document.getElementById('simulatorContainer'),
         search: document.getElementById('searchInp'),
         langBtn: document.getElementById('langBtn')
     };
@@ -593,9 +636,10 @@
         slides.forEach((s, i) => {
             let li = document.createElement('li');
             li.className = 'list-item';
-            let icon = s.isPracticeSlide ? '⚔️' : (s.isQuizSlide ? '🎓' : (i+1));
-            let shortTitle = (isAr ? s.title : s.title_en).split(':')[0].substring(0, 30);
-            li.innerHTML = `<span>${shortTitle}</span> <span style="opacity:0.6; font-size:0.8rem;">${icon}</span>`;
+            let icon = s.isSimulator ? '🔬' : (s.isPracticeSlide ? '⚔️' : (s.isQuizSlide ? '🎓' : (i+1)));
+            let titleText = isAr ? s.title : s.title_en;
+            let shortTitle = titleText.split(':')[0].substring(0, 30);
+            li.innerHTML = `<span>${shortTitle}</span> <span style="opacity:0.6; font-size:1rem;">${icon}</span>`;
             li.onclick = () => { loadSlide(i); if(window.innerWidth <= 900) toggleSidebar(); };
             dom.list.appendChild(li);
         });
@@ -609,10 +653,15 @@
         dom.title.innerHTML = isAr ? s.title : s.title_en;
         dom.badge.innerText = isAr ? s.badge : s.badge_en;
         dom.content.innerHTML = isAr ? s.content : s.content_en;
+        
         dom.pracContainer.style.display = 'none';
         dom.quizContainer.style.display = 'none';
+        dom.simContainer.style.display = 'none';
+        
+        if (s.isSimulator) { dom.simContainer.style.display = 'block'; renderSimulator(); }
         if (s.isPracticeSlide) { dom.pracContainer.style.display = 'block'; renderPractice(); }
         if (s.isQuizSlide) { dom.quizContainer.style.display = 'block'; renderQuiz(); }
+        
         document.getElementById('prevBtn').disabled = index === 0;
         document.getElementById('nextBtn').disabled = index === slides.length - 1;
         updateActiveItem(index);
@@ -624,6 +673,75 @@
         items.forEach((item, i) => { if(i === index) item.classList.add('active'); else item.classList.remove('active'); });
     }
 
+    // ================== Simulator Logic ==================
+    function renderSimulator() {
+        const isAr = uiLang === 'ar';
+        const lblA = isAr ? "المدخل A" : "Input A";
+        const lblB = isAr ? "المدخل B" : "Input B";
+        const lblOut = isAr ? "المخرج X" : "Output X";
+        
+        dom.simContainer.innerHTML = `
+            <div class="simulator-box" dir="ltr">
+                <select id="gateSelect" class="sim-gate-select" onchange="runSim()">
+                    <option value="AND">AND Gate (A · B)</option>
+                    <option value="OR">OR Gate (A + B)</option>
+                    <option value="NOT">NOT Gate (A') - Single Input</option>
+                    <option value="NAND">NAND Gate (A · B)'</option>
+                    <option value="NOR">NOR Gate (A + B)'</option>
+                    <option value="XOR">XOR Gate (A ⊕ B)</option>
+                    <option value="XNOR">XNOR Gate (A ⊕ B)'</option>
+                </select>
+                <div class="sim-controls">
+                    <div class="switch-container">
+                        <span class="switch-label">${lblA}</span>
+                        <label class="switch"><input type="checkbox" id="simA" onchange="runSim()"><span class="slider"></span></label>
+                        <span id="valA" style="font-weight:bold; font-size:1.2rem;">0</span>
+                    </div>
+                    <div class="switch-container">
+                        <span class="switch-label">${lblB}</span>
+                        <label class="switch"><input type="checkbox" id="simB" onchange="runSim()"><span class="slider"></span></label>
+                        <span id="valB" style="font-weight:bold; font-size:1.2rem;">0</span>
+                    </div>
+                    <i class="fa-solid fa-arrow-right" style="font-size:2rem; color:var(--primary);"></i>
+                    <div class="output-container">
+                        <span class="switch-label">${lblOut}</span>
+                        <div id="simBulb" class="bulb"></div>
+                        <span id="simOutText" class="sim-result-text">0</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        runSim();
+    }
+
+    window.runSim = function() {
+        const gate = document.getElementById('gateSelect').value;
+        const inputA = document.getElementById('simA').checked;
+        const inputB = document.getElementById('simB').checked;
+        const elB = document.getElementById('simB');
+        let output = false;
+
+        if (gate === 'NOT') {
+            elB.disabled = true; elB.checked = false; output = !inputA;
+        } else {
+            elB.disabled = false;
+            if (gate === 'AND') output = (inputA && inputB);
+            else if (gate === 'OR') output = (inputA || inputB);
+            else if (gate === 'NAND') output = !(inputA && inputB);
+            else if (gate === 'NOR') output = !(inputA || inputB);
+            else if (gate === 'XOR') output = (inputA !== inputB);
+            else if (gate === 'XNOR') output = (inputA === inputB);
+        }
+
+        document.getElementById('valA').innerText = inputA ? '1' : '0';
+        document.getElementById('valB').innerText = (gate === 'NOT') ? '-' : (inputB ? '1' : '0');
+        document.getElementById('simOutText').innerText = output ? '1' : '0';
+        
+        const bulb = document.getElementById('simBulb');
+        if (output) bulb.classList.add('on');
+        else bulb.classList.remove('on');
+    }
+
     function renderPractice() {
         dom.pracContainer.innerHTML = '';
         const isAr = uiLang === 'ar';
@@ -632,7 +750,8 @@
             div.className = 'practice-item';
             let btnText = isAr ? "تحقق" : "Check";
             let plcHolder = isAr ? "اكتب الإجابة (إنجليزي)..." : "Type answer here...";
-            div.innerHTML = `<div class="practice-q">س${i+1}: ${item.q}</div>
+            let qText = isAr ? item.q_ar : item.q_en;
+            div.innerHTML = `<div class="practice-q">${isAr ? 'س' : 'Q'}${i+1}: ${qText}</div>
                 <div class="practice-controls">
                     <input type="text" class="practice-input" id="prac_inp_${i}" placeholder="${plcHolder}" autocomplete="off" dir="ltr" style="text-align: left;">
                     <button class="btn-check" onclick="window.checkAns(${i}, '${item.ans}')">${btnText}</button>
@@ -650,7 +769,7 @@
             div.className = 'quiz-item';
             let ansText = isAr ? item.a_ar : item.a_en;
             div.innerHTML = `<div class="quiz-q" onclick="this.parentElement.classList.toggle('revealed')">
-                    <span style="direction: rtl; display: inline-block;">س${i+1}: ${item.q_en}</span>
+                    <span style="direction: ltr; display: inline-block;">${item.q_en}</span>
                     <span style="font-size:1.2rem;">▼</span>
                 </div>
                 <div class="quiz-a">${ansText}</div>`;
@@ -682,6 +801,7 @@
         dom.search.placeholder = isAr ? "ابحث في الشرح..." : "Search in slides...";
         document.getElementById('searchIcon').style.right = isAr ? "15px" : "auto";
         document.getElementById('searchIcon').style.left = isAr ? "auto" : "15px";
+        document.getElementById('backBtnText').innerText = isAr ? "الرجوع" : "Back";
         dom.prev.innerText = isAr ? "السابق" : "Prev";
         dom.next.innerText = isAr ? "التالي" : "Next";
         document.documentElement.dir = isAr ? 'rtl' : 'ltr';

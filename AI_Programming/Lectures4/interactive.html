@@ -88,13 +88,13 @@
         .search-input-styled:focus { border-color: var(--primary); }
         [data-theme="dark"] .search-input-styled { background-color: rgba(255,255,255,0.05); color: white; }
         
-        .slide-list { list-style: none; overflow-y: auto; flex: 1; padding: 10px; }
+        .slide-list { list-style: none; overflow-y: auto; flex: 1; padding: 10px; -webkit-overflow-scrolling: touch; }
         .list-item { padding: 12px 15px; margin-bottom: 6px; border-radius: 10px; cursor: pointer; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; }
         .list-item:hover { background: rgba(0,0,0,0.05); color: var(--primary); }
         .list-item.active { background: linear-gradient(90deg, var(--primary), var(--accent)); color: white; font-weight: bold; }
 
-        main { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; align-items: center; scroll-behavior: smooth; }
-        .card { background: var(--glass); width: 100%; max-width: 900px; padding: 30px; border-radius: 20px; border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 30px; animation: slideUp 0.5s ease-out; }
+        main { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; align-items: center; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+        .card { background: var(--glass); width: 100%; max-width: 900px; padding: 30px; border-radius: 20px; border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 30px; animation: slideUp 0.5s ease-out; overflow-x: hidden; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         .badge { display: inline-block; padding: 5px 15px; border-radius: 50px; background: rgba(214, 158, 46, 0.15); color: var(--accent); font-weight: bold; font-size: 0.8rem; margin-bottom: 15px; }
@@ -102,7 +102,7 @@
         .content { font-size: 1.1rem; line-height: 1.8; margin-bottom: 25px; color: var(--text); }
         ul, ol { padding-inline-start: 20px; } li { margin-bottom: 10px; }
         
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 15px; background: rgba(0,0,0,0.02); border-radius: 10px; overflow: hidden; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 15px; background: rgba(0,0,0,0.02); border-radius: 10px; overflow: hidden; min-width: 500px; }
         th, td { padding: 12px; border: 1px solid var(--border); text-align: center; }
         th { background: var(--primary); color: white; font-weight: bold; }
         tr:nth-child(even) { background: rgba(0,0,0,0.04); }
@@ -119,10 +119,10 @@
         .practice-item { background: rgba(0,0,0,0.03); border: 1px solid var(--border); padding: 20px; border-radius: 12px; margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px; }
         .practice-q { font-weight: bold; font-size: 1.2rem; direction: rtl; text-align: right; color: var(--primary); }
         [dir="ltr"] .practice-q { direction: ltr; text-align: left; }
-        .practice-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: flex-start; }
-        .practice-input { padding: 10px; border-radius: 8px; border: 2px solid var(--border); font-size: 1.1rem; font-family: 'Cairo'; outline: none; width: 100%; max-width: 400px; background: var(--glass); color: var(--text); }
-        .btn-check { padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-family: 'Cairo'; }
-        .feedback { font-weight: bold; font-size: 1rem; display: none; padding: 5px 10px; border-radius: 5px; }
+        .practice-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: flex-start; width: 100%; }
+        .practice-input { padding: 10px; border-radius: 8px; border: 2px solid var(--border); font-size: 1.1rem; font-family: 'Cairo'; outline: none; width: 100%; max-width: 400px; background: var(--glass); color: var(--text); flex-grow: 1; }
+        .btn-check { padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-family: 'Cairo'; white-space: nowrap; }
+        .feedback { font-weight: bold; font-size: 1rem; display: none; padding: 5px 10px; border-radius: 5px; width: 100%; }
         .feedback.correct { display: inline-block; background: rgba(56, 161, 105, 0.2); color: var(--success); }
         .feedback.wrong { display: inline-block; background: rgba(229, 62, 62, 0.2); color: var(--error); }
 
@@ -131,7 +131,7 @@
         .quiz-a { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--border); color: var(--text); font-weight:bold;}
         .quiz-item.revealed .quiz-a { display: block; animation: fadeIn 0.3s; }
 
-        .bb8-toggle { --toggle-size: 5px; --toggle-width: 10.625em; --toggle-height: 5.625em; --toggle-offset: calc((var(--toggle-height) - var(--bb8-diameter)) / 2); --toggle-bg: linear-gradient(#2c4770, #070e2b 35%, #628cac 50% 70%, #a6c5d4) no-repeat; --bb8-diameter: 4.375em; --radius: 99em; --transition: 0.4s; --accent: #de7d2f; --bb8-bg: #fff; cursor: pointer; font-size: var(--toggle-size); display: inline-block; }
+        .bb8-toggle { --toggle-size: 5px; --toggle-width: 10.625em; --toggle-height: 5.625em; --toggle-offset: calc((var(--toggle-height) - var(--bb8-diameter)) / 2); --toggle-bg: linear-gradient(#2c4770, #070e2b 35%, #628cac 50% 70%, #a6c5d4) no-repeat; --bb8-diameter: 4.375em; --radius: 99em; --transition: 0.4s; --accent: #de7d2f; --bb8-bg: #fff; cursor: pointer; font-size: var(--toggle-size); display: inline-block; flex-shrink: 0; }
         .bb8-toggle *, .bb8-toggle *::before, .bb8-toggle *::after { box-sizing: border-box; }
         .bb8-toggle__checkbox { appearance: none; display: none; }
         .bb8-toggle__container { width: var(--toggle-width); height: var(--toggle-height); background: var(--toggle-bg); background-size: 100% 11.25em; background-position-y: -5.625em; border-radius: var(--radius); position: relative; transition: var(--transition); }
@@ -159,8 +159,8 @@
         .bb8-toggle__checkbox:active + .bb8-toggle__container .bb8__head-container { transform: rotate(25deg); }
         .bb8-toggle__checkbox:checked:active + .bb8-toggle__container .bb8__head-container { transform: rotate(-25deg); }
 
-        .nav-actions { display: flex; gap: 30px; margin-top: 30px; justify-content: center; flex-wrap: wrap; }
-        .styled-btn { position: relative; width: 140px; height: 50px; background: transparent; border: none; font-weight: bold; color: var(--text); cursor: pointer; font-family: 'Cairo'; font-size: 14px; }
+        .nav-actions { display: flex; gap: 30px; margin-top: 30px; justify-content: center; flex-wrap: wrap; width: 100%; }
+        .styled-btn { position: relative; width: 140px; height: 50px; background: transparent; border: none; font-weight: bold; color: var(--text); cursor: pointer; font-family: 'Cairo'; font-size: 14px; max-width: 45%; }
         .clip-box { --color: var(--primary); position: absolute; top: 0; left: 0; overflow: hidden; width: 100%; height: 100%; border: 5px double var(--color); box-shadow: inset 0px 0px 15px rgba(39, 97, 195, 0.3); -webkit-clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%); clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%); }
         .arrow { position: absolute; transition: 0.2s; background-color: var(--primary); top: 35%; width: 11%; height: 30%; }
         .leftArrow { left: -13.5%; -webkit-clip-path: polygon(100% 0, 100% 100%, 0 50%); clip-path: polygon(100% 0, 100% 100%, 0 50%); }
@@ -175,30 +175,42 @@
         @keyframes rightArrow8 { from { transform: translate(0px); } to { transform: translateX(-10px); } }
         @keyframes leftArrow8 { from { transform: translate(0px); } to { transform: translateX(10px); } }
 
-        .menu-btn { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text); cursor: pointer; z-index: 10; }
+        .menu-btn { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text); cursor: pointer; z-index: 10; padding: 5px; }
         
+        /* التجاوب (Responsive Design) */
         @media (max-width: 900px) {
             header { padding: 0 15px; }
             .header-subtitle { display: none; }
-            .header-title-container { position: static; transform: none; flex: 1; text-align: right; margin: 0 10px; justify-content: flex-start; }
-            [dir="ltr"] .header-title-container { text-align: left; }
-            .header-title { font-size: 1rem; }
+            .header-title-container { position: static; transform: none; flex: 1; text-align: center; margin: 0 10px; justify-content: center; }
+            .header-title { font-size: 1.1rem; }
             .controls { gap: 10px; }
             .bb8-toggle { --toggle-size: 3px; }
             .lang-button.type1 { width: 90px; height: 40px;}
             .lang-button.type1::after, .lang-button.type1::before { width: 90px; height: 40px; font-size: 0.9rem; }
-            aside { position: fixed; right: -320px; left: auto; height: calc(100vh - 80px); top: 80px; width: 80%; max-width: 300px; box-shadow: -5px 0 15px rgba(0,0,0,0.2); transition: right 0.3s ease, left 0.3s ease; }
+            
+            aside { position: fixed; right: -320px; left: auto; height: calc(100vh - 80px); top: 80px; width: 80%; max-width: 300px; box-shadow: -5px 0 15px rgba(0,0,0,0.5); transition: right 0.3s ease, left 0.3s ease; border-left: 1px solid var(--border); }
             aside.open { right: 0; left: auto; }
-            [dir="ltr"] aside { right: auto; left: -320px; }
+            [dir="ltr"] aside { right: auto; left: -320px; border-left: none; border-right: 1px solid var(--border); }
             [dir="ltr"] aside.open { right: auto; left: 0; }
+            
             .menu-btn { display: block; }
             .cta-back { display: none; }
-            main { padding: 10px; }
+            main { padding: 15px; }
             .card { padding: 20px; margin-bottom: 20px; }
             .nav-actions { gap: 15px; }
-            .styled-btn { width: 110px; font-size: 12px; }
-            .practice-controls { justify-content: center; }
-            .practice-q { text-align: center; }
+            .styled-btn { font-size: 13px; max-width: 48%; width: 120px; }
+        }
+
+        @media (max-width: 480px) {
+            .header-title-container { text-align: right; justify-content: flex-start; }
+            [dir="ltr"] .header-title-container { text-align: left; }
+            .header-title { font-size: 0.9rem; white-space: normal; line-height: 1.2; }
+            .practice-controls { flex-direction: column; align-items: stretch; }
+            .practice-input { max-width: 100%; }
+            .btn-check { width: 100%; padding: 12px; }
+            h1 { font-size: 1.3rem; }
+            .content { font-size: 1rem; }
+            .styled-btn { max-width: 48%; width: 100%; font-size: 11px; }
         }
     </style>
 </head>
@@ -323,23 +335,27 @@
             badge_en: "Core Concepts",
             content: `
                 <p>عشان تفهم برمجة الكائنات، لازم تحفظ الأربع كلمات دول زي اسمك:</p>
-                <table>
-                    <tr><th>المصطلح البرمجي</th><th>المعنى الحرفي</th><th>الشرح المبسط</th></tr>
-                    <tr><td><strong>Class</strong></td><td>القالب / المخطط</td><td>زي مخطط العربية قبل ما تتصنع. هو التصميم الأساسي.</td></tr>
-                    <tr><td><strong>Object</strong></td><td>الكائن / النسخة</td><td>نسخة حقيقية تم تصنيعها من هذا القالب.</td></tr>
-                    <tr><td><strong>Attribute</strong></td><td>الخصائص / البيانات</td><td>البيانات اللي جوه الأوبجكت (زي اللون، الاسم، العمر).</td></tr>
-                    <tr><td><strong>Method</strong></td><td>الوظيفة / الفعل</td><td>دالة (Function) موجودة جوه الكلاس بتعمل أكشن معين.</td></tr>
-                </table>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <tr><th>المصطلح البرمجي</th><th>المعنى الحرفي</th><th>الشرح المبسط</th></tr>
+                        <tr><td><strong>Class</strong></td><td>القالب / المخطط</td><td>زي مخطط العربية قبل ما تتصنع. هو التصميم الأساسي.</td></tr>
+                        <tr><td><strong>Object</strong></td><td>الكائن / النسخة</td><td>نسخة حقيقية تم تصنيعها من هذا القالب.</td></tr>
+                        <tr><td><strong>Attribute</strong></td><td>الخصائص / البيانات</td><td>البيانات اللي جوه الأوبجكت (زي اللون، الاسم، العمر).</td></tr>
+                        <tr><td><strong>Method</strong></td><td>الوظيفة / الفعل</td><td>دالة (Function) موجودة جوه الكلاس بتعمل أكشن معين.</td></tr>
+                    </table>
+                </div>
             `,
             content_en: `
                 <p>To master OOP, you need to understand these four core terms:</p>
-                <table>
-                    <tr><th>Concept</th><th>Meaning</th><th>Simple Explanation</th></tr>
-                    <tr><td><strong>Class</strong></td><td>Template / Blueprint</td><td>Like a car's blueprint before it's built. The core design.</td></tr>
-                    <tr><td><strong>Object</strong></td><td>Instance</td><td>A real, usable copy created from the blueprint.</td></tr>
-                    <tr><td><strong>Attribute</strong></td><td>Data / Properties</td><td>The variables stored inside the object (Color, Name, Age).</td></tr>
-                    <tr><td><strong>Method</strong></td><td>Function / Behavior</td><td>A function defined inside a class that performs an action.</td></tr>
-                </table>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <tr><th>Concept</th><th>Meaning</th><th>Simple Explanation</th></tr>
+                        <tr><td><strong>Class</strong></td><td>Template / Blueprint</td><td>Like a car's blueprint before it's built. The core design.</td></tr>
+                        <tr><td><strong>Object</strong></td><td>Instance</td><td>A real, usable copy created from the blueprint.</td></tr>
+                        <tr><td><strong>Attribute</strong></td><td>Data / Properties</td><td>The variables stored inside the object (Color, Name, Age).</td></tr>
+                        <tr><td><strong>Method</strong></td><td>Function / Behavior</td><td>A function defined inside a class that performs an action.</td></tr>
+                    </table>
+                </div>
             `
         },
         {
@@ -789,7 +805,9 @@ self.__age = <span class="keyword">20</span> <span class="comment"># No one outs
         document.getElementById('nextBtn').disabled = index === slides.length - 1;
 
         updateActiveItem(index);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // إعادة التمرير لأعلى الشريحة عند التبديل
+        document.querySelector('main').scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function updateActiveItem(index) {

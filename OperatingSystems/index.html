@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>نظم التشغيل | المنصة التعليمية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -22,10 +22,10 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
         body { background: var(--bg-body); color: var(--text-main); min-height: 100vh; overflow-x: hidden; -webkit-user-select: none; user-select: none; }
 
-        .navbar { display: flex; justify-content: space-between; align-items: center; background: var(--header-bg); padding: 15px 5%; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
-        .page-title { font-size: 1.5rem; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 10px; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; background: var(--header-bg); padding: 15px 5%; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 15px; }
+        .page-title { font-size: 1.5rem; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 10px; text-align: center;}
 
-        .cta-back { display: flex; align-items: center; padding: 8px 25px; text-decoration: none; font-size: 18px; font-weight: bold; color: white; background: #6225e6; transition: 1s; box-shadow: -5px 5px 0 var(--text-main); transform: skewX(15deg); border: none; cursor: pointer; }
+        .cta-back { display: flex; align-items: center; justify-content: center; padding: 8px 25px; text-decoration: none; font-size: 18px; font-weight: bold; color: white; background: #6225e6; transition: 1s; box-shadow: -5px 5px 0 var(--text-main); transform: skewX(15deg); border: none; cursor: pointer; }
         [data-theme="dark"] .cta-back { background: var(--icon-color); color: #1e293b; box-shadow: -5px 5px 0 #ffffff; }
         .cta-back:focus { outline: none; } .cta-back:hover { transition: 0.5s; box-shadow: -8px 8px 0 #fbc638; }
         .cta-back .span { transform: skewX(-15deg); font-family: 'Cairo'; }
@@ -37,9 +37,11 @@
         .cta-back:hover .two { transform: translateX(0%); animation: color_anim 1s infinite 0.4s; }
         @keyframes color_anim { 0% { fill: white; } 50% { fill: #fbc638; } 100% { fill: white; } }
 
-        .container { max-width: 1200px; margin: 50px auto; padding: 0 5%; }
+        .container { max-width: 1200px; margin: 50px auto; padding: 0 5%; width: 100%; }
         .title { text-align: center; font-size: 1.8rem; font-weight: 900; margin-bottom: 50px; color: var(--text-main); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 35px; direction: rtl; }
+        
+        /* تقليل الـ minmax لتجنب خروج الكروت عن الشاشة في الهواتف الصغيرة */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 35px; direction: rtl; }
 
         .lec-card { border-radius: 40px 10px 40px 10px; padding: 40px 20px 30px; position: relative; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.15); display: flex; flex-direction: column; transition: transform 0.4s, box-shadow 0.4s; border: 1px solid rgba(255,255,255,0.2); }
         .active-card { background: var(--card-active); color: white; }
@@ -58,7 +60,43 @@
         .spinner { width: 3em; height: 3em; border-radius: 50%; border: 2px solid transparent; box-shadow: -10px -10px 10px #6359f8, 0px -10px 10px 0px #9c32e2, 10px -10px 10px #f36896, 10px 0 10px #ff0b0b, 10px 10px 10px 0px #ff5500, 0 10px 10px 0px #ff9500, -10px 10px 10px 0px #ffb700; animation: rot55 0.7s linear infinite; position: relative; }
         .spinnerin { border: 2px solid var(--text-locked); width: 1.5em; height: 1.5em; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
         @keyframes rot55 { to { transform: rotate(360deg); } }
-        @media (max-width: 768px) { .navbar { flex-direction: column-reverse; gap: 20px; padding: 20px;} .floating-icon { top: -20px; right: -15px; width: 60px; height: 60px; font-size: 18px;} }
+        
+        /* --------------------------------------------------- */
+        /* --- Media Queries (التعديلات الكاملة للريسبونسيف) --- */
+        /* --------------------------------------------------- */
+
+        /* شاشات التابلت والموبايل العرضية */
+        @media (max-width: 768px) { 
+            .navbar { flex-direction: column-reverse; padding: 20px; gap: 20px; } 
+            .floating-icon { top: -20px; right: -10px; width: 55px; height: 55px; font-size: 18px;} 
+            .container { margin: 30px auto; }
+            .title { font-size: 1.5rem; margin-bottom: 40px; }
+            .grid { gap: 25px; }
+        }
+
+        /* شاشات الموبايل الصغيرة */
+        @media (max-width: 480px) {
+            .navbar { padding: 15px; gap: 15px; }
+            .page-title { font-size: 1.3rem; }
+            
+            /* ضبط زر الرجوع ليناسب الشاشة بالكامل دون تشويه */
+            .cta-back { width: 90%; max-width: 300px; font-size: 16px; padding: 8px 15px; transform: skewX(10deg); }
+            .cta-back .span { transform: skewX(-10deg); }
+            
+            .title { font-size: 1.35rem; margin-bottom: 35px; }
+            
+            /* تحويل الشبكة لعمود واحد فقط ليأخذ كامل عرض الشاشة الصغيرة */
+            .grid { grid-template-columns: 1fr; gap: 30px; }
+            
+            .lec-card { padding: 35px 15px 25px; }
+            .lec-card h3 { font-size: 1.3rem; }
+            .lec-card p { font-size: 0.95rem; }
+            .btn-glass { font-size: 1rem; padding: 10px 20px; }
+            
+            /* تصغير أيقونة التحميل */
+            .spinner { width: 2.5em; height: 2.5em; }
+            .spinnerin { width: 1.2em; height: 1.2em; }
+        }
     </style>
 </head>
 <body>

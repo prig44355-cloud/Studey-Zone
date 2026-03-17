@@ -169,6 +169,10 @@
 
         .menu-btn { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text); cursor: pointer; z-index: 10; }
         
+        /* --------------------------------------------------- */
+        /* --- Media Queries (لتجاوب الشاشات بمختلف أحجامها) --- */
+        /* --------------------------------------------------- */
+
         @media (max-width: 900px) {
             header { padding: 0 10px; }
             .header-subtitle { display: none; }
@@ -185,6 +189,35 @@
             .menu-btn { display: block; }
             main { padding: 10px; }
             .card { padding: 20px; margin-bottom: 20px; }
+            
+            table { display: block; overflow-x: auto; white-space: nowrap; }
+        }
+
+        /* شاشات الموبايل الصغيرة جداً */
+        @media (max-width: 480px) {
+            header { padding: 0 5px; height: 65px; }
+            .header-title { font-size: 0.95rem; }
+            .cta-back { padding: 5px 8px; }
+            .cta-back .second { margin-right: 0; width: 15px; }
+            .menu-btn { font-size: 1.3rem; margin-left: 5px;}
+            .lang-button { padding: 5px 8px; font-size: 0.8rem; }
+            .bb8-toggle { --toggle-size: 2.2px; } /* تصغير الأيقونة لتناسب الهيدر */
+            
+            main { padding: 10px 5px; }
+            .card { padding: 20px 15px; border-radius: 15px; }
+            h1 { font-size: 1.3rem; }
+            .content { font-size: 1rem; }
+            
+            /* تعديل منطقة التدريب لترص العناصر تحت بعضها بشكل أنيق */
+            .practice-item { padding: 15px; }
+            .practice-controls { flex-direction: column; align-items: stretch; gap: 12px;}
+            .practice-input { max-width: 100%; width: 100%; }
+            .btn-check { width: 100%; }
+            .feedback { text-align: center; }
+            
+            /* أزرار التنقل السفلية */
+            .nav-actions { gap: 10px; flex-direction: row; justify-content: space-between;}
+            .styled-btn { width: 48%; height: 45px; font-size: 12px; }
         }
     </style>
 </head><body data-theme="light">
@@ -475,7 +508,7 @@
     // ==========================================
     const practiceQuestions = [
         { q: "نظام التشغيل الذي ينفذ مجموعة من الوظائف معاً دون تدخل المستخدم هو نظام الـ ____؟", ans: "batch" },
-        { q: "الاحتفاظ بعدة برامج في الذاكرة لتجنب تعطل المعالج (CPU) أثناء انتظار הـ I/O يسمى؟", ans: "multiprogramming" },
+        { q: "الاحتفاظ بعدة برامج في الذاكرة لتجنب تعطل المعالج (CPU) أثناء انتظار الـ I/O يسمى؟", ans: "multiprogramming" },
         { q: "العملية التي تنتظر دورها للدخول إلى المعالج تكون في حالة الـ ____؟", ans: "ready" },
         { q: "خوارزمية الجدولة التي تعطي كل عملية وقتاً ثابتاً (Time Quantum) تسمى؟", ans: "round robin" },
         { q: "تقنية تعطي النظام وهماً بوجود مساحة رامات (RAM) أكبر من الحقيقية باستخدام الهارد ديسك تسمى ____ Memory؟", ans: "virtual" },

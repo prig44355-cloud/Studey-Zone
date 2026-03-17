@@ -199,7 +199,7 @@
             .controls { gap: 10px; }
             .bb8-toggle { --toggle-size: 3px; }
             .cta-back { padding: 6px 10px; margin-right: 5px;}
-            .cta-back .span { display: none; } /* إخفاء كلمة رجوع في الموبايل وترك الأيقونة */
+            .cta-back .span { display: none; }
             aside { position: fixed; right: -320px; left: auto; height: calc(100vh - 75px); top: 75px; width: 80%; max-width: 300px; box-shadow: -5px 0 15px rgba(0,0,0,0.2); transition: right 0.3s ease, left 0.3s ease; }
             aside.open { right: 0; left: auto; }
             [dir="ltr"] aside { right: auto; left: -320px; }
@@ -209,7 +209,8 @@
             .card { padding: 20px; margin-bottom: 20px; }
         }
     </style>
-</head><body data-theme="light">
+</head>
+<body data-theme="light">
 
     <header>
         <div class="header-right">
@@ -266,19 +267,21 @@
 
                 <div class="nav-actions">
                     <button class="styled-btn" id="prevBtn" onclick="move(-1)">
-                        <span style="position:relative; z-index:2;">السابق</span>
+                        <span style="position:relative; z-index:2;" id="prevText">السابق</span>
                         <div class="clip-box"><div class="leftTop corner"></div><div class="rightBottom corner"></div><div class="rightTop corner"></div><div class="leftBottom corner"></div></div>
                         <span class="rightArrow arrow"></span><span class="leftArrow arrow"></span>
                     </button>
                     <button class="styled-btn" id="nextBtn" onclick="move(1)">
-                        <span style="position:relative; z-index:2;">التالي</span>
+                        <span style="position:relative; z-index:2;" id="nextText">التالي</span>
                         <div class="clip-box"><div class="leftTop corner"></div><div class="rightBottom corner"></div><div class="rightTop corner"></div><div class="leftBottom corner"></div></div>
                         <span class="rightArrow arrow"></span><span class="leftArrow arrow"></span>
                     </button>
                 </div>
             </div>
         </main>
-    </div><script>
+    </div>
+
+<script>
     // ==========================================
     // 1. DATA: Bilingual Slides Data (Logic Gates)
     // ==========================================
@@ -457,30 +460,35 @@
     ];
 
     // ==========================================
-    // 2. DATA: Practice & Quiz
+    // 2. DATA: Practice & Quiz (Bilingual Update)
     // ==========================================
     const practiceQuestions = [
-        { q: "بوابة تُعطي مخرج (HIGH) فقط عندما تكون جميع المداخل (HIGH)؟", ans: "and" },
-        { q: "المعادلة (X = A + B) تُمثل بوابة الـ ____؟", ans: "or" },
-        { q: "المعادلة المنطقية (X = A̅) تمثل بوابة الـ ____؟", ans: "not" },
-        { q: "بوابة تُعطي مخرج (LOW) فقط عندما تكون جميع المداخل (HIGH)؟", ans: "nand" },
-        { q: "بوابة تُعطي مخرج (HIGH) فقط إذا اتفقت (تطابقت) المداخل مع بعضها؟", ans: "xnor" }
+        { q_ar: "بوابة تُعطي مخرج (HIGH) فقط عندما تكون جميع المداخل (HIGH)؟", q_en: "A gate that outputs HIGH ONLY when all inputs are HIGH?", ans: "and" },
+        { q_ar: "المعادلة (X = A + B) تُمثل بوابة الـ ____؟", q_en: "The expression (X = A + B) represents the ____ gate?", ans: "or" },
+        { q_ar: "المعادلة المنطقية (X = A̅) تمثل بوابة الـ ____؟", q_en: "The expression (X = A̅) represents the ____ gate?", ans: "not" },
+        { q_ar: "بوابة تُعطي مخرج (LOW) فقط عندما تكون جميع المداخل (HIGH)؟", q_en: "A gate that outputs LOW ONLY when all inputs are HIGH?", ans: "nand" },
+        { q_ar: "بوابة تُعطي مخرج (HIGH) فقط إذا اتفقت (تطابقت) المداخل مع بعضها؟", q_en: "A gate that outputs HIGH ONLY if the inputs are identical?", ans: "xnor" }
     ];
 
     const solvedQuizData = [
-        { q_en: "The expression X = A+B means?", 
+        { q_ar: "ماذا تعني المعادلة X = A+B؟", 
+          q_en: "The expression X = A+B means?", 
           a_ar: "الحل: A OR B (تعبر عن الجمع المنطقي وهو عملية الـ OR).", 
           a_en: "Answer: A OR B. The plus sign represents the OR operation." },
-        { q_en: "A 2-input gate produces a HIGH output only when all of its inputs are HIGH. This is a(n)?", 
+        { q_ar: "بوابة ذات مدخلين تعطي خرج (HIGH) فقط عندما تكون جميع مداخلها (HIGH). ما هي؟", 
+          q_en: "A 2-input gate produces a HIGH output only when all of its inputs are HIGH. This is a(n)?", 
           a_ar: "الحل: AND gate (بوابة الضرب المنطقي).", 
           a_en: "Answer: AND gate. It requires all inputs to be True to output True." },
-        { q_en: "A 2-input gate produces a HIGH output only when the inputs agree. This type of gate is a(n)?", 
+        { q_ar: "بوابة ذات مدخلين تعطي خرج (HIGH) فقط عندما تكون مداخلها متطابقة. ما هي؟", 
+          q_en: "A 2-input gate produces a HIGH output only when the inputs agree. This type of gate is a(n)?", 
           a_ar: "الحل: XNOR gate (بوابة التوافق، وتعطي 1 إذا كان الدخلين 0,0 أو 1,1).", 
           a_en: "Answer: XNOR gate. It outputs HIGH only if inputs are identical." },
-        { q_en: "The symbol (≥1) is for a(n)?", 
+        { q_ar: "الرمز (≥1) يُستخدم للتعبير عن بوابة الـ...؟", 
+          q_en: "The symbol (≥1) is for a(n)?", 
           a_ar: "الحل: OR gate (حيث تعطي 1 إذا كان مدخل واحد أو أكثر قيمته 1).", 
           a_en: "Answer: OR gate (Meaning 1 or more inputs are HIGH)." },
-        { q_en: "The symbol (&) is for a(n)?", 
+        { q_ar: "الرمز (&) يُستخدم للتعبير عن بوابة الـ...؟", 
+          q_en: "The symbol (&) is for a(n)?", 
           a_ar: "الحل: AND gate (بوابة التوافق الحرفي).", 
           a_en: "Answer: AND gate." }
     ];
@@ -496,8 +504,8 @@
         content: document.getElementById('slideHtml'),
         badge: document.getElementById('slideBadge'),
         list: document.getElementById('list'),
-        prev: document.querySelector('#prevBtn span:first-child'),
-        next: document.querySelector('#nextBtn span:first-child'),
+        prev: document.getElementById('prevText'),
+        next: document.getElementById('nextText'),
         sidebar: document.getElementById('sidebar'),
         pracContainer: document.getElementById('practiceContainer'),
         quizContainer: document.getElementById('quizContainer'),
@@ -646,8 +654,9 @@
             div.className = 'practice-item';
             let btnText = isAr ? "تحقق" : "Check";
             let plcHolder = isAr ? "اكتب الإجابة (إنجليزي)..." : "Type answer here...";
+            let qText = isAr ? item.q_ar : item.q_en;
             div.innerHTML = `
-                <div class="practice-q">س${i+1}: ${item.q}</div>
+                <div class="practice-q">${isAr ? 'س'+(i+1) : 'Q'+(i+1)}: ${qText}</div>
                 <div class="practice-controls">
                     <input type="text" class="practice-input" id="prac_inp_${i}" placeholder="${plcHolder}" autocomplete="off" dir="ltr" style="text-align: left;">
                     <button class="btn-check" onclick="window.checkAns(${i}, '${item.ans}')">${btnText}</button>
@@ -665,9 +674,10 @@
             let div = document.createElement('div');
             div.className = 'quiz-item';
             let ansText = isAr ? item.a_ar : item.a_en;
+            let qText = isAr ? item.q_ar : item.q_en;
             div.innerHTML = `
                 <div class="quiz-q" onclick="this.parentElement.classList.toggle('revealed')">
-                    <span style="direction: ltr; display: inline-block;">${item.q_en}</span>
+                    <span style="direction: ${isAr ? 'rtl' : 'ltr'}; display: inline-block;">${qText}</span>
                     <span style="font-size:1.2rem;">▼</span>
                 </div>
                 <div class="quiz-a">${ansText}</div>
@@ -705,7 +715,7 @@
         dom.langBtn.innerText = isAr ? "🇺🇸 EN" : "🇪🇬 AR";
         document.getElementById('pageTitle').innerText = isAr ? "البوابات المنطقية 🔌" : "Logic Gates 🔌";
         document.getElementById('pageSubTitle').innerText = isAr ? "Lec 2: Logic Gates" : "Chapter 3: Logic Gates";
-        document.getElementById('backBtnText').innerText = isAr ? "الرجوع" : "Back"; // ترجمة زرار الرجوع
+        document.getElementById('backBtnText').innerText = isAr ? "الرجوع" : "Back"; 
         
         dom.search.placeholder = isAr ? "ابحث في الشرح..." : "Search in slides...";
         document.getElementById('searchIcon').style.right = isAr ? "15px" : "auto";

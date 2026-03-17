@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مهارات التفاوض | المنصة التعليمية</title>
+    <title>الدوائر الرقمية | المنصة التعليمية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -63,7 +63,7 @@
 </head>
 <body>
     <header class="navbar">
-        <h2 class="page-title">🤝 مهارات التفاوض</h2>
+        <h2 class="page-title">🔌 الدوائر الرقمية</h2>
         <button class="cta-back" onclick="window.location.href='../index.html'">
             <span class="second"><svg viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><path class="one" d="M40.15,3.89 L43.97,0.13 L65.69,20.78 L44.67,42.86 L40.15,39.10 L56.99,21.85 Z" fill="#FFFFFF"></path><path class="two" d="M20.15,3.89 L23.97,0.13 L45.69,20.78 L24.67,42.86 L20.15,39.10 L36.99,21.85 Z" fill="#FFFFFF"></path><path class="three" d="M0.15,3.89 L3.97,0.13 L25.69,20.78 L4.67,42.86 L0.15,39.10 L16.99,21.85 Z" fill="#FFFFFF"></path></g></svg></span>
             <span class="span">الرئيسية</span>
@@ -76,21 +76,21 @@
             <div class="lec-card active-card">
                 <div class="floating-icon">1</div>
                 <h3 class="lec-title">المحاضرة الأولى</h3>
-                <p class="lec-desc">مقدمة في فنون التفاوض.</p>
+                <p class="lec-desc">مقدمة في أنظمة الأعداد والتشفير.</p>
                 <a href="Lecture1/index.html" class="btn-glass">دخول للمحاضرة</a>
             </div>
 
             <div class="lec-card active-card">
                 <div class="floating-icon">2</div>
                 <h3 class="lec-title">المحاضرة الثانية</h3>
-                <p class="lec-desc">استراتيجيات وتكتيكات التفاوض.</p>
+                <p class="lec-desc">البوابات المنطقية (Logic Gates).</p>
                 <a href="Lecture2/index.html" class="btn-glass">دخول للمحاضرة</a>
             </div>
 
             <div class="lec-card active-card">
                 <div class="floating-icon">3</div>
                 <h3 class="lec-title">المحاضرة الثالثة</h3>
-                <p class="lec-desc">مهارات التواصل الفعال وحل النزاعات.</p>
+                <p class="lec-desc">التبسيط المنطقي (Simplifications).</p>
                 <a href="Lecture3/index.html" class="btn-glass">دخول للمحاضرة</a>
             </div>
 
@@ -115,7 +115,7 @@
             document.documentElement.dir = globalLang === 'ar' ? 'rtl' : 'ltr';
             
             if (globalLang === 'en') {
-                document.querySelector('.page-title').innerText = '🤝 Negotiation Skills';
+                document.querySelector('.page-title').innerText = '🔌 Digital Circuits';
                 document.querySelector('.span').innerText = 'Home';
                 document.querySelector('.title').innerText = 'Lectures List 📚';
                 
@@ -128,9 +128,9 @@
 
                 // ترجمة الوصف
                 const descs = document.querySelectorAll('.lec-desc');
-                if(descs[0]) descs[0].innerText = 'Introduction to Negotiation Arts.';
-                if(descs[1]) descs[1].innerText = 'Negotiation Strategies and Tactics.';
-                if(descs[2]) descs[2].innerText = 'Effective Communication and Conflict Resolution.';
+                if(descs[0]) descs[0].innerText = 'Introduction to Number Systems and Coding.';
+                if(descs[1]) descs[1].innerText = 'Logic Gates.';
+                if(descs[2]) descs[2].innerText = 'Logic Simplifications.';
 
                 // ترجمة الأزرار
                 const btns = document.querySelectorAll('.btn-glass');
